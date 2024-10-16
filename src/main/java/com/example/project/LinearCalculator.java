@@ -37,22 +37,30 @@ y2=Integer.valueOf(point2.substring(l2+1, point2.indexOf(")")));
     //distance() -> returns a double. 
     //calculates the distance between the two points to the nearest HUNDREDTH and returns the value.
     public double distance(){
-        return (Math.round(Math.pow(Math.pow(x2-x1, 2)+(Math.pow(y2-y1, 2)),0.5)*100.0))/100;
+        double result=Math.pow(Math.pow(x2-x1, 2)+(Math.pow(y2-y1, 2)),0.5);
+        result*=100;
+        result=Math.round(result);
+        return result/100.0;
     }
     //yInt() -> returns a double.
     //calculates the y intercept of the equation and returns the value to the nearest HUNDREDTH
     //if y-int if undefined, should return -999.99
     public double yInt(){
+        if (slope()==-999.99){
+            return -999.99;
+           }
         double yInt;
-        if (x1==0){ yInt=y1;} else if (x2==0){yInt=y2;}
-        yInt=y2-(x2*slope());
-        return yInt;
+        if (x1==0){ return y1;} else if (x2==0){return y2;}
+        double result=y1-(x1*slope());
+        yInt=Math.round(result *100);
+        return yInt/100.0;
     }
 
     //slope() -> returns a double. 
     //calculates the slope of the equations and returns the value to the nearest HUNDREDTH
     //if slope is undefined, should return -999.99
     public double slope(){
+        
         if (x2-x1==0){ return -999.99;}
         double result=(double)(y2-y1)/(x2-x1);
         return ((Math.round((result*100)))/100.0);
@@ -66,10 +74,16 @@ y2=Integer.valueOf(point2.substring(l2+1, point2.indexOf(")")));
            if (slope()==-999.99){
             return "undefined";
            }
-           if (yInt()==0){
-            return "y = " + slope()+"x";
+           if (slope()==0.0){
+            return "y=" + yInt();
            }
-        return "y = " + slope()+"x +"+yInt();
+           if (yInt()==0){
+            return "y=" + slope()+"x";
+           }
+           if (yInt()<0){
+            return "y=" + slope()+"x"+yInt();
+           }
+        return "y=" + slope()+"x+"+yInt();
     }
 
 

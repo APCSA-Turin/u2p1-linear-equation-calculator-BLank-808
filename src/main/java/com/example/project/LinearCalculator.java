@@ -37,9 +37,11 @@ y2=Integer.valueOf(point2.substring(l2+1, point2.indexOf(")")));
     //distance() -> returns a double. 
     //calculates the distance between the two points to the nearest HUNDREDTH and returns the value.
     public double distance(){
+        //This calculates the distance to the double limit
         double result=Math.pow(Math.pow(x2-x1, 2)+(Math.pow(y2-y1, 2)),0.5);
         result*=100;
         result=Math.round(result);
+        //By using round after multipling by 100 you get distance to the nearest hundreth when redevided by 100
         return result/100.0;
     }
     //yInt() -> returns a double.
@@ -63,6 +65,7 @@ y2=Integer.valueOf(point2.substring(l2+1, point2.indexOf(")")));
         
         if (x2-x1==0){ return -999.99;}
         double result=(double)(y2-y1)/(x2-x1);
+        //to get slope you do rise (change in y) over run(change in x)
         return ((Math.round((result*100)))/100.0);
     }
 
